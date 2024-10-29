@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scraping Status</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function fetchStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status-message').innerText = data.message;
+                });
+        }
+
+        setInterval(fetchStatus, 1000); // Check status every second
+    </script>
+</head>
+<body class="container">
+    <h1 class="mt-5">Scraping Status</h1>
+    <p id="status-message" class="lead">Idle</p>
+    <form id="scraping-form" method="post" action="/automation">
+        <div class="form-group">
+            <label for="search_key">Enter URL:</label>
+            <input type="text" class="form-control" id="search_key" name="search_key" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Start Scraping</button>
+    </form>
+</body>
+</html>
